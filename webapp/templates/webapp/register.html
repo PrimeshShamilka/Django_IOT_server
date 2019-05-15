@@ -1,0 +1,11 @@
+{% extends 'webapp/base.html' %}
+
+{% block content %}
+    <h1>REGISTER</h1>
+    <form class="site-form" action="/webapp/register/" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="REGISTER">
+    </form>
+
+{% endblock %}

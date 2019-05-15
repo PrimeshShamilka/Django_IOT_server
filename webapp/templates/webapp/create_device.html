@@ -1,0 +1,11 @@
+{% extends 'webapp/base.html' %}
+
+{% block content %}
+    <h1>CREATE YOUR DEVICE</h1>
+    <form class="site-form" action="index.html" method="POST">
+        {% csrf_token %}
+        {{ form }}
+    </form>
+
+
+{% endblock %}
