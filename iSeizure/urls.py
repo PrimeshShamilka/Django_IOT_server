@@ -28,7 +28,7 @@ urlpatterns = [
 
     #REST API - devices
     #as_view method treat the deviceList class as a view function
-    path('devices/',views.devicesList.as_view(), name='listView'),
+    path('webapp_devices/',views.devicesList.as_view(), name='listView'),
 
     #REST API - File upload view
     path('fileupload/', views.FileUploadView.as_view()),
