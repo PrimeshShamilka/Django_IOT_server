@@ -11,15 +11,15 @@ class devices(models.Model):
     def __str__(self):
           return self.device_name
 
-    def save(self, *args, **kwargs):
-        #Check the MAC address and update database
-        flag = devices.objects.all().filter(mac_address=self.mac_address)
-        if not flag:
-            # Calling the superclass method to save data
-            super().save(*args, **kwargs)
-            print ("SAVED") 
-        else:
-            print ("NOT SAVED")   
+    # def save(self, *args, **kwargs):
+    #     #Check the MAC address and update database
+    #     flag = devices.objects.all().filter(mac_address=self.mac_address)
+    #     if not flag:
+    #         # Calling the superclass method to save data
+    #         super().save(*args, **kwargs)
+    #         print ("SAVED") 
+    #     else:
+    #         print ("NOT SAVED")   
             
             
 class data(models.Model):
