@@ -12,3 +12,4 @@ class FileUploadForm(forms.ModelForm):
     class Meta:
         model = models.data
         fields = ['device','values']
+        

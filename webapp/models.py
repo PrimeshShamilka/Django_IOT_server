@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class devices(models.Model):
     device_name = models.CharField(max_length=100)
     user_name = models.CharField(max_length=100)
