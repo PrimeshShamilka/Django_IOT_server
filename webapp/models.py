@@ -2,7 +2,7 @@ from django.db import models
 
 
 class devices(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True, default=1)
     device_name = models.CharField(max_length=100)
     user_name = models.CharField(max_length=100)
     user_email = models.CharField(max_length=100)
