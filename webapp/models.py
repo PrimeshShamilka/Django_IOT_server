@@ -1,6 +1,7 @@
 from django.db import models
 
 class devices(models.Model):
+    
     device_name = models.CharField(max_length=100)
     user_name = models.CharField(max_length=100)
     user_email = models.CharField(max_length=100)
@@ -22,7 +23,7 @@ class devices(models.Model):
 
 
 class data(models.Model):
-    device = models.ForeignKey(devices, on_delete=models.CASCADE)
+    #device = models.ForeignKey(devices, on_delete=models.CASCADE)
     values = models.FileField(blank=True, null=True)
     created_date = models.DateTimeField(null=True,auto_now_add=True)
 
