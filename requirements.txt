@@ -7,6 +7,7 @@ Jinja2==2.10.1
 MarkupSafe==1.1.1
 msgpack==0.6.1
 psycopg2==2.8.2
+python-dotenv==0.10.2
 pytz==2019.1
 Twisted==19.2.0
 txaio==18.8.1
