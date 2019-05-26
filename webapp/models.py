@@ -22,7 +22,7 @@ class devices(models.Model):
 
 
 class data(models.Model):
-    #device = models.ForeignKey(devices, on_delete=models.CASCADE)
+    device = models.ForeignKey(devices, on_delete=models.CASCADE)
     values = models.FileField(blank=True, null=True)
     created_date = models.DateTimeField(null=True,auto_now_add=True)
 

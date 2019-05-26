@@ -11,15 +11,13 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 import django_heroku
 import os
-import dj_database_url
-import dotenv
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
+
 
 
 # File path to all the media (directory)
@@ -99,8 +97,17 @@ WSGI_APPLICATION = 'iSeizure.wsgi.application'
 #     }
 # }
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'iSeizure',
+        'USER': 'postgres',
+        'PASSWORD': 'post123',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
 
 
 # Password validation
@@ -143,7 +150,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'staticfiles')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Channel settings
 CHANNEL_LAYERS = {
@@ -162,5 +169,4 @@ django_heroku.settings(locals())
 # This should already be in your settings.py
 #django_heroku.settings(locals())
 
-django_heroku.settings(locals())
-del DATABASES['default']['OPTIONS']['sslmode']
+
