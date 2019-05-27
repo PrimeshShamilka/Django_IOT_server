@@ -166,7 +166,4 @@ CHANNEL_LAYERS = {
 django_heroku.settings(locals())
 
 
-# This should already be in your settings.py
-#django_heroku.settings(locals())
-
 
