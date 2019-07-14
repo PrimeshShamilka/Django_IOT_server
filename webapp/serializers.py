@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from . models import devices
 from . models import data
+from . models import real_time_data
 
 class devicesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,9 +10,6 @@ class devicesSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return devices.objects.create(**validated_data)
-
-
-    
 
     # def create(self, validated_data):
     #     device_id_ = validated_data.get('device_id', None)
@@ -25,6 +23,12 @@ class devicesSerializer(serializers.ModelSerializer):
 
     #     answer = Answer.objects.create(**validated_data)
     #     return answer
+
+
+class realTimeDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = real_time_data
+        fields = ['device','heart_rate','EEG_reading']
 
 class FileUploadSerializer(serializers.ModelSerializer):
     class Meta:

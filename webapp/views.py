@@ -7,32 +7,23 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+from django.template import loader
 from . models import devices
+from . models import real_time_data
 from . serializers import devicesSerializer
 from . serializers import FileUploadSerializer
+from . serializers import realTimeDataSerializer
 
 from rest_framework import viewsets
 from . import serializers
 from webapp import models
-
 
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from . import forms
 from django.contrib.auth import login
 
-#HOME PAGE
-def index(request):
-    return render(request,'webapp/index.html')
-#     all_devices = devices.objects.all()
-#     template = loader.get_template('webapp/index.html')
-#     context = {
-#         'all_devices': all,
-#     }
-#     return HttpResponse(template.render(context,request))
-
-    #return HttpResponse('<h1>WEBAPP</h1>')
-    #return render(request, 'webapp/index.html')
+#import SMSSender
 
 
 #register a new user
@@ -63,12 +54,13 @@ def login(request):
 
 #DASHBOARD-To view data
 def dashboard(request):
-    return HttpResponse("DASHBOARD")
-
-
-
-
-
+    #return render(request, 'webapp/dashboard.html')
+    all_real_time_data = real_time_data.objects.all()
+    template = loader.get_template('webapp/dashboard.html')
+    context = {
+        'all_real_time_data': all_real_time_data,
+    }
+    return HttpResponse(template.render(context, request))
 
 
 #create a new device
@@ -81,7 +73,7 @@ def display(request):
     return render(request,'webapp/display.html')
 
 
-#REST API
+#REST API for registering a device
 class devicesList(APIView):
 
     #GET
@@ -93,20 +85,41 @@ class devicesList(APIView):
 
     #POST
     def post(self, request):
-        #fetching JSON data
+        #fetching JSON object
         new_device_data = request.data.get('devices')
 
-        #serializing new device data to a serializer object   
+        #serializing JSON object to a serializer object   
         new_device = devicesSerializer(data=new_device_data)    
 
+        print (new_device.Meta)
         if new_device.is_valid(raise_exception=True):
-            new_device_saved = new_device.save()
-        
+            mac = new_device.save()
+
+        sending_device_id = list(devices.objects.all().filter(mac_address=mac).values('id'))[0].get('id')
         #return Response({"success": "Device '{}' created successfully".format(new_device_saved.device_name)})
-        response = HttpResponse("Here's the text of the Web page.")
+        response = HttpResponse( '%s%d%s' %("Device registered successfully!. Your device id is ", sending_device_id,"."))
         return response
    
 
+
+
+#REST API for recieving real time data
+class realTimeDataView(APIView):
+        
+    #POST
+    def post(self, request):
+        #fetching JSON object
+        new_device_data = request.data.get('real_time_data')
+
+        #serializing JSON object to a serializer object/django models
+        new_data = realTimeDataSerializer(data=new_device_data)    
+
+        if new_data.is_valid(raise_exception=True):
+            new_data_saved = new_data.save()
+        
+        response = HttpResponse("Data recieved successfully")
+        return response
+   
         
 class FileUploadView(APIView):
     parser_class = (FileUploadParser,)
@@ -120,3 +133,7 @@ class FileUploadView(APIView):
           return Response(file_serializer.data, status=status.HTTP_201_CREATED)
       else:
           return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+#class smsSenderView()

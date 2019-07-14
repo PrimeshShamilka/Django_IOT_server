@@ -1,0 +1,1 @@
+Received message: {'sourceAddress': 'tel:94771122336', 'requestId': '1562912942756', 'encoding': '0', 'applicationId': 'APP_000001', 'message': 'Test primesh pathirana', 'version': '1.0'}

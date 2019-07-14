@@ -24,7 +24,11 @@ from webapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('webapp/', include('webapp.urls')),
+
+    #home page
+    path('', views.dashboard, name='index'),
 
     #REST API - devices
     #as_view method treat the deviceList class as a view function
@@ -33,7 +37,8 @@ urlpatterns = [
     #REST API - File upload view
     path('fileupload/', views.FileUploadView.as_view()),
 
-    path('',views.dashboard)
+    #REST API - real time data 
+    path('realtimedata/',views.realTimeDataView.as_view())
 ]
 
 

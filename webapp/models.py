@@ -8,18 +8,23 @@ class devices(models.Model):
     mac_address=models.CharField(max_length=100,null=True)
 
     def __str__(self):
-          return self.device_name
+          return self.mac_address
 
     def save(self, *args, **kwargs):
         #Check the MAC address and update database
         flag = devices.objects.all().filter(mac_address=self.mac_address)
         if not flag:
+            temp = True
+        else:
+            temp = False
+        if not flag:
             # Calling the superclass method to save data
             super().save(*args, **kwargs)
-            print ("SAVED")
+            print ("Device registered successfully.")
         else:
-            print ("NOT SAVED")
-
+            print ("Device already registered.")
+            return temp
+        print (temp)
 
 class data(models.Model):
     device = models.ForeignKey(devices, on_delete=models.CASCADE)
@@ -29,3 +34,11 @@ class data(models.Model):
     def __str__(self):
         return str(self.device)
 
+class real_time_data(models.Model):
+    device = models.ForeignKey(devices, on_delete=models.CASCADE)
+    created_date = models.DateTimeField(null=True,auto_now_add=True)
+    heart_rate = models.IntegerField(default=0)
+    EEG_reading = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.created_date)

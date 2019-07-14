@@ -4,10 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    #home pageh
-    path('', views.index, name='index'),
-
-    #path('device/',views.device,name='device'),
 
     #register new user
     path('register/',views.register,name='register'),

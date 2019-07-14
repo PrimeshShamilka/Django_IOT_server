@@ -1,0 +1,23 @@
+<h1>
+    iSeizure
+</h1>
+    
+<table>
+    <tr>
+        <th>Device</th>
+        <th>Timestamp</th> 
+        <th>Heart rate</th>
+        <th>EEG reading</th>
+    </tr>   
+    {% for data in all_real_time_data %}
+        <tr>
+            <td>{{data.device}}</td>
+            <td>{{data.created_date}}</td> 
+            <td>{{data.heart_rate}}</td>
+            <td>{{data.EEG_reading}}</td>
+        </tr>
+    {% endfor %}  
+
+</table>
+       
+

@@ -1,0 +1,1 @@
+send message: {'message': 'Hello World', 'destinationAddresses': 'tel:94771122336', 'password': 'password', 'applicationId': 'APP_001'}
