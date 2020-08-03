@@ -4,7 +4,7 @@ A RESTFUL web service designed for iSeizure IoT device.
 ## How to run
 ### In linux,
 
-- clone this repository to your local machine
+- Clone this repository to your local machine
 - Create a python virtual environment
 ``` 
     python -m venv ~/.virtualenvs/djangodev
